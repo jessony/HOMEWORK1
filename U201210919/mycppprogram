@@ -1,0 +1,66 @@
+#include <iostream> 
+using namespace std;
+#include <stdlib.h> 
+//#include <Eigen/Dense> 
+#include <math.h>  
+using namespace std; 
+//using Eigen::MatrixXd; 
+int main() 
+{ 
+  int option;
+  struct point {
+    double px;
+    double py;
+  };
+  struct point p1;
+  struct point p2;
+  cout<<"请输入线段的起点"<<endl;
+  cin>>p1.px;
+  cin>>p1.py;
+  cout<<"请输入线段的终点"<<endl;
+  cin>>p2.px;
+  cin>>p2.py;
+  cout<<"请输入线段的操作"<<endl<<"move:0"<<endl<<"rotation:1"<<endl;
+  cin>>option;
+  switch(option)
+{
+case 0:{
+ double transp[2];
+
+cout<<"请输入平移向量"<<endl;
+cin>>transp[0];
+cin>>transp[1];
+p1.px+=transp[0];
+p1.py+=transp[1];
+p2.px+=transp[0];
+p2.py+=transp[1];
+cout<<"平移的结果"<<endl;
+cout<<"("<<p1.px<<","<<p1.py<<")"<<"("<<p2.px<<","<<p2.py<<")"<<endl;
+break;
+}
+
+case 1:{
+//MatrixXd m(2,2);
+double alfa;
+cout<<"请输入旋转角度(0~360)"<<endl;
+cin>>alfa;
+double pi=3.141592654;
+alfa=alfa/180*pi;
+ m(0,0)=cos(alfa); 
+ m(0,1)=sin(alfa); 
+ m(1,0)=-sin(alfa); 
+ m(1,1)=cos(alfa);
+double  temp1=p1.px*m(0,0)+p1.py*m(1,0);
+double 	temp2=p1.px*m(0,1)+p1.py*m(1,1);
+double 	temp3=p2.px*m(0,0)+p2.py*m(1,0);
+double  temp4=p2.px*m(0,1)+p2.py*m(1,1);
+  	p1.px=temp1;
+  	p1.py=temp2;
+  	p2.px=temp3;
+  	p2.px=temp4;
+        cout<<"旋转的结果"<<endl;
+  	cout<<"("<<p1.px<<","<<p1.py<<")"<<"("<<p2.px<<","<<p2.py<<")"<<endl;
+}
+}
+return 0;
+}
